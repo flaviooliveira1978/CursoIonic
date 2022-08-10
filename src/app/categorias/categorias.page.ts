@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
+import { CategoriaService } from 'src/services/domain/categoria.service';
 
 @Component({
   selector: 'app-categorias',
@@ -8,12 +9,17 @@ import { MenuController } from '@ionic/angular';
 })
 export class CategoriasPage implements OnInit {
 
-  constructor() {     
+  constructor(public nav:NavController,
+    public categoriaService:CategoriaService) {     
 
   }
   ngOnInit() {
   }
 
-
+  ionViewDidEnter(){
+    this.categoriaService.findAll().subscribe(response => {
+      console.log(response)
+    });
+  }
 
 }
