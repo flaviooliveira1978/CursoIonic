@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +9,24 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(public router:Router) { }
+  constructor(public router:Router, public menu:MenuController,public nav:NavController) { 
+
+  }
 
   ngOnInit() {
   }
 
   submit(){
-    this.router.navigateByUrl('categorias');
+   // this.router.navigateByUrl('categorias');
 
-
+   this.nav.navigateRoot('categorias')
   }
+
+  ionViewWillEnter(){
+    this.menu.swipeGesture(false)
+  }
+  ionViewDidLeave(){
+    this.menu.swipeGesture(true)
+  }
+  
 }
