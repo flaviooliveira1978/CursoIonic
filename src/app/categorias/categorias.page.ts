@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { API_CONFIG } from 'src/environments/environment';
+import { CategoriaDTO } from 'src/models/categoria.dto';
 import { CategoriaService } from 'src/services/domain/categoria.service';
 
 @Component({
@@ -9,16 +11,23 @@ import { CategoriaService } from 'src/services/domain/categoria.service';
 })
 export class CategoriasPage implements OnInit {
 
+  public items : CategoriaDTO[];
+  public imgBaseUrl: string ;
+
   constructor(public nav:NavController,
     public categoriaService:CategoriaService) {     
 
   }
   ngOnInit() {
+    this.imgBaseUrl = `${API_CONFIG.bucketBaseUrl}`;
   }
 
   ionViewDidEnter(){
     this.categoriaService.findAll().subscribe(response => {
-      console.log(response)
+      this.items = response;
+    },
+    error=> {
+      console.log(error)
     });
   }
 
