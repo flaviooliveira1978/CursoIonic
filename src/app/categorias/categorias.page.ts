@@ -12,23 +12,21 @@ import { CategoriaService } from 'src/services/domain/categoria.service';
 export class CategoriasPage implements OnInit {
 
   public items : CategoriaDTO[];
-  public imgBaseUrl: string ;
+  public imgBaseUrl: string = API_CONFIG.bucketBaseUrl;
 
   constructor(public nav:NavController,
     public categoriaService:CategoriaService) {     
 
   }
   ngOnInit() {
-    this.imgBaseUrl = `${API_CONFIG.bucketBaseUrl}`;
+
   }
 
   ionViewDidEnter(){
     this.categoriaService.findAll().subscribe(response => {
       this.items = response;
     },
-    error=> {
-      console.log(error)
-    });
+    error=> {});
   }
 
 }

@@ -21,14 +21,14 @@ export class AppComponent {
         icon  : "home"
       },
       {
-        title : "Chat",
-        url   : "/chat",
-        icon  : "chatboxes"
+        title : "Categorias",
+        url   : "/categorias",
+        icon  : "categories"
       },
       {
-        title : "Contacts",
-        url   : "/contacts",
-        icon  : "contacts"
+        title : "Produtos",
+        url   : "/produtos",
+        icon  : "products"
       },
     ]
   }
