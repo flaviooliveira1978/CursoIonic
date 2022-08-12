@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, NavController } from '@ionic/angular';
+import { CredenciaisDTO } from 'src/models/credenciais.dto';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,12 @@ import { MenuController, NavController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
+  creds : CredenciaisDTO = {
+    email:"",
+    senha:""
+
+  };
+
   constructor(public router:Router, public menu:MenuController,public nav:NavController) { 
 
   }
@@ -16,9 +23,9 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  submit(){
+  login(){
    // this.router.navigateByUrl('categorias');
-
+   console.log(this.creds);
    this.nav.navigateRoot('categorias')
   }
 
