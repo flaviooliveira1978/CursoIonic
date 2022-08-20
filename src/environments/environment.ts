@@ -19,3 +19,7 @@ export const API_CONFIG = {
   bucketBaseUrl : "https://codigo-curso-spring-ffneto.s3.us-east-2.amazonaws.com"
 
 };
+
+export const LOCALSTORAGE_KEYS = {
+  localUser: 'localUser'
+}
