@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, NavController } from '@ionic/angular';
 import { CredenciaisDTO } from 'src/models/credenciais.dto';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,11 @@ export class LoginPage implements OnInit {
 
   };
 
-  constructor(public router:Router, public menu:MenuController,public nav:NavController) { 
+  constructor(
+    public router:Router, 
+    public menu:MenuController,
+    public nav:NavController,
+    public auth:AuthService) { 
 
   }
 
@@ -24,9 +29,15 @@ export class LoginPage implements OnInit {
   }
 
   login(){
-   // this.router.navigateByUrl('categorias');
-   console.log(this.creds);
-   this.nav.navigateRoot('categorias')
+
+   this.auth.authenticate(this.creds).subscribe(response => {
+    console.log('resposta:'+ response.headers.get('Authorization'))
+    this.nav.navigateRoot('categorias')
+  },
+  error=> {
+    console.log('Acesso Negado!')
+  });
+  
   }
 
   ionViewWillEnter(){

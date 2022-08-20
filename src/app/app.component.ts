@@ -23,12 +23,12 @@ export class AppComponent {
       {
         title : "Categorias",
         url   : "/categorias",
-        icon  : "categories"
+        icon  : "list"
       },
       {
         title : "Produtos",
         url   : "/produtos",
-        icon  : "products"
+        icon  : "cart"
       },
     ]
   }
