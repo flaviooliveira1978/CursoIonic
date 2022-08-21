@@ -13,4 +13,13 @@ export class CategoriaService {
     findAll():Observable<CategoriaDTO[]>{
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/categorias`);
     }
+
+    ping() {
+        console.log('--> vair entrar no ping clientes');
+        this.http.get(API_CONFIG.baseUrl + '/clientes/1').subscribe(
+            (data) => console.log(data),
+            (err) => console.log(err)
+        );
+
+  }
 }

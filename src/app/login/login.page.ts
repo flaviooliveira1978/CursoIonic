@@ -31,7 +31,6 @@ export class LoginPage implements OnInit {
   login(){
 
    this.auth.authenticate(this.creds).subscribe(response => {
-    console.log('OK: vai pra successFul');
     this.auth.successfulLogin(response.headers.get('Authorization'));
     this.nav.navigateRoot('categorias')
   },

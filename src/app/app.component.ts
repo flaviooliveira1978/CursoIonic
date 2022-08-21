@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { API_CONFIG } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   navigate: any;
-  constructor() {
+  constructor(public http: HttpClient) {
     this.sideMenu();
   }
+
+
 
   sideMenu()
   {
