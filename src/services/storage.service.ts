@@ -14,7 +14,7 @@ export class StorageService {
         }
     }
     getLocalUser():LocalUser{
-        let usr = localStorage.getItemItem(LOCALSTORAGE_KEYS.localUser);
+        let usr = localStorage.getItem(LOCALSTORAGE_KEYS.localUser);
         if(usr == null){
             return null;
         }

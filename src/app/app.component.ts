@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { API_CONFIG } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,7 @@ export class AppComponent {
     [
       {
         title : "Home",
-        url   : "/home",
+        url   : "/login",
         icon  : "home"
       },
       {
@@ -30,9 +30,9 @@ export class AppComponent {
         icon  : "list"
       },
       {
-        title : "Produtos",
-        url   : "/produtos",
-        icon  : "cart"
+        title : "Profile",
+        url   : "/profile",
+        icon  : "person-circle-outline"
       },
     ]
   }
