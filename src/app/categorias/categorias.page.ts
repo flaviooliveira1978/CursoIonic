@@ -27,7 +27,7 @@ export class CategoriasPage implements OnInit {
       this.items = response;
     },
     error=> {});
-    this.categoriaService.ping();
+
   }
 
 }

@@ -20,20 +20,16 @@ export class AppComponent {
     this.navigate =
     [
       {
-        title : "Home",
-        url   : "/login",
-        icon  : "home"
+        title : "Profile",
+        url   : "/profile",
+        icon  : "person-circle-outline"
       },
       {
         title : "Categorias",
         url   : "/categorias",
         icon  : "list"
       },
-      {
-        title : "Profile",
-        url   : "/profile",
-        icon  : "person-circle-outline"
-      },
+
     ]
   }
 }

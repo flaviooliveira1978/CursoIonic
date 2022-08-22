@@ -12,6 +12,7 @@ import { ErrorInterceptorProvider } from 'src/interceptors/error-interceptor';
 import { AuthService } from 'src/services/auth.service';
 import { StorageService } from 'src/services/storage.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ClienteService } from 'src/services/domain/cliente.service';
 
 
 
@@ -38,6 +39,7 @@ export function tokenGetter() {
     CategoriaService, 
     AuthService,
     StorageService,
+    ClienteService,
     ErrorInterceptorProvider],
   bootstrap: [AppComponent],
 })
