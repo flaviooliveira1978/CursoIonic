@@ -12,30 +12,34 @@ import { StorageService } from "./storage.service";
 @Injectable()
 export class AuthService {
 
-    endpoint = API_CONFIG.baseUrl + '/login';
+    endpointLogin = API_CONFIG.baseUrl + '/login';
+    endpointRefreshToken = API_CONFIG.baseUrl + '/auth/refresh_token';
 
     helper: JwtHelperService = new JwtHelperService();
 
 
     contentHeader = new HttpHeaders({"Content-Type": "application/json"});
 
-    constructor(public http:HttpClient, public storage: StorageService){
+    constructor(public http:HttpClient, 
+        public storage: StorageService){
     }
-  
+
     authenticate(user: CredenciaisDTO): Observable<any> {
-        return this.http.post<CredenciaisDTO>(this.endpoint, JSON.stringify(user), 
+        return this.http.post<CredenciaisDTO>(this.endpointLogin, JSON.stringify(user), 
+        { headers: this.contentHeader, observe: 'response'});
+    }
+
+    refreshToken(): Observable<any> {
+        return this.http.post(this.endpointRefreshToken,'', 
         { headers: this.contentHeader, observe: 'response'});
       }
 
     successfulLogin(authorizationValue:string){
         
-        localStorage.setItem("access_token",authorizationValue.substring(7))
-
         let usr : LocalUser = {
             token: authorizationValue.substring(7),
             email: this.getUserFromJwt(authorizationValue)
         };
-        localStorage.setItem("access_token",usr.token)
 
         console.log('usuario logado jwt: '+  usr.email);
         console.log('token jwt: '+  usr.token);
@@ -44,11 +48,13 @@ export class AuthService {
     logout(){
         this.storage.setLocalUser(null);
 
-    }
+    } 
 
     getUserFromJwt(myRawToken: string):string {
     
         return this.helper.decodeToken(myRawToken).sub;
     }
+
+
 }
 

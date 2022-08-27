@@ -13,13 +13,19 @@ import { AuthService } from 'src/services/auth.service';
 import { StorageService } from 'src/services/storage.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ClienteService } from 'src/services/domain/cliente.service';
+import { LOCALSTORAGE_KEYS } from 'src/environments/environment';
 
 
 
 export function tokenGetter() {
 
-  return localStorage.getItem("access_token");
+
+    let usr = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEYS.localUser));
+    return usr.token;
+
 }
+
+
 
 @NgModule({
   declarations: [AppComponent],
