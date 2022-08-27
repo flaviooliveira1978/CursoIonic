@@ -45,7 +45,6 @@ export class LoginPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    console.log("entrou no DidEnter")
     this.auth.refreshToken().subscribe(response => {
       this.auth.successfulLogin(response.headers.get('Authorization'));
       this.nav.navigateRoot('categorias')

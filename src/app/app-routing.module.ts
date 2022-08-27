@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'logout',
+    loadChildren: () => import('./logout/logout.module').then( m => m.LogoutPageModule)
   }
 ];
 @NgModule({

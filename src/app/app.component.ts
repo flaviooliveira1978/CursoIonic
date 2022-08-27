@@ -29,6 +29,11 @@ export class AppComponent {
         url   : "/categorias",
         icon  : "list"
       },
+      {
+        title : "Logout",
+        url   : "/logout",
+        icon  : "exit-outline"
+      },
 
     ]
   }
