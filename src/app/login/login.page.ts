@@ -40,6 +40,12 @@ export class LoginPage implements OnInit {
   
   }
 
+  signup(){
+    this.nav.navigateRoot('signup')
+  }
+
+
+
   ionViewWillEnter(){
     this.menu.swipeGesture(false)
   }
