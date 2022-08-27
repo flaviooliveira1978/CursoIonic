@@ -28,8 +28,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:8080","localhost:8100"],
-        disallowedRoutes: ["http://localhost:8080/login","http://localhost:8100/login"],
+        allowedDomains: ["localhost:8080"],
+        disallowedRoutes: ["http://localhost:8080/login"],
       },
     }),
     IonicModule.forRoot(), 

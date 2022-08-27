@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { API_CONFIG } from 'src/environments/environment';
 import { ClienteDTO } from 'src/models/cliente.dto';
 import { ClienteService } from 'src/services/domain/cliente.service';
@@ -15,7 +16,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     public storage: StorageService,
-    public clienteService: ClienteService) { }
+    public clienteService: ClienteService,
+    public nav:NavController) { }
 
   ngOnInit() {
 
@@ -25,10 +27,18 @@ export class ProfilePage implements OnInit {
         response =>{
           this.cliente = response;
           this.getImageIfExists();
+          
         },
-        error => {}
+        error => {
+          if (error.status == 403){
+            this.nav.navigateRoot('login')
+          }
+        }
       );
 
+    }
+    else {
+      this.nav.navigateRoot('login')
     }
 
   }
