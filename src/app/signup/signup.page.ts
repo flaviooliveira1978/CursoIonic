@@ -66,7 +66,6 @@ export class SignupPage implements OnInit {
     let estado_id = this.profileForm.value.estadoId;
 
     if(estado_id){ 
-      console.log("Update Cidade - Id do estado: " + estado_id);
 
       this.cidadeService.findAll(estado_id).subscribe(response => {
         this.cidades = response;

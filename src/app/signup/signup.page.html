@@ -11,10 +11,12 @@
       <ion-label stacked>Nome*</ion-label>
       <ion-input formControlName="nome" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="profileForm.controls['nome'].dirty && profileForm.controls['nome'].errors" > Valor inválido</p>
     <ion-item>
       <ion-label stacked>Email*</ion-label>
       <ion-input formControlName="email" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="profileForm.controls['email'].dirty && profileForm.controls['email'].errors" > Valor inválido</p>
     <ion-list>
       <ion-radio-group formControlName="tipo">
         <ion-list-header>
@@ -34,18 +36,25 @@
       <ion-label stacked>CPF ou CNPJ</ion-label>
       <ion-input formControlName="cpfOuCnpj" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="profileForm.controls['cpfOuCnpj'].dirty && profileForm.controls['cpfOuCnpj'].errors" > Valor inválido</p>
     <ion-item>
       <ion-label stacked>Senha*</ion-label>
       <ion-input formControlName="senha" type="password"></ion-input>
     </ion-item> 
+    <p class="danger" *ngIf="profileForm.controls['senha'].dirty && profileForm.controls['senha'].errors" > Valor inválido</p>
+
     <ion-item>
       <ion-label stacked>Logradouro*</ion-label>
       <ion-input formControlName="logradouro" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="profileForm.controls['logradouro'].dirty && profileForm.controls['logradouro'].errors" > Valor inválido</p>
+
     <ion-item>
       <ion-label stacked>Número*</ion-label>
       <ion-input formControlName="numero" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="profileForm.controls['numero'].dirty && profileForm.controls['numero'].errors" > Valor inválido</p>
+
     <ion-item>
       <ion-label stacked>Complemento</ion-label>
       <ion-input formControlName="complemento" type="text"></ion-input>
@@ -54,14 +63,19 @@
       <ion-label stacked>Bairro</ion-label>
       <ion-input formControlName="bairro" type="text"></ion-input>
     </ion-item>
+   
     <ion-item>
       <ion-label stacked>CEP*</ion-label>
       <ion-input formControlName="cep" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="profileForm.controls['cep'].dirty && profileForm.controls['cep'].errors" > Valor inválido</p>
+
     <ion-item>
       <ion-label stacked>Telefone 1*</ion-label>
       <ion-input formControlName="telefone1" type="text"></ion-input>
     </ion-item>
+    <p class="danger" *ngIf="profileForm.controls['telefone1'].dirty && profileForm.controls['telefone1'].errors" > Valor inválido</p>
+
     <ion-item>
       <ion-label stacked>Telefone 2</ion-label>
       <ion-input formControlName="telefone2" type="text"></ion-input>
@@ -82,6 +96,6 @@
         <ion-select-option *ngFor= "let cidade of cidades; first as f" [value]="cidade.id">{{cidade.nome}}</ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-button expand="block" type="submit">Criar conta</ion-button>
+    <ion-button expand="block" type="submit" [disabled]="profileForm.invalid">Criar conta</ion-button>
   </form>
 </ion-content>
