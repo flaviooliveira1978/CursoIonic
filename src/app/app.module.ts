@@ -14,6 +14,7 @@ import { StorageService } from 'src/services/storage.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ClienteService } from 'src/services/domain/cliente.service';
 import { LOCALSTORAGE_KEYS } from 'src/environments/environment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,7 +30,8 @@ export function tokenGetter() {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, 
+  imports: [
+    BrowserModule, 
     HttpClientModule,
     JwtModule.forRoot({
       config: {
@@ -39,7 +41,10 @@ export function tokenGetter() {
       },
     }),
     IonicModule.forRoot(), 
-    AppRoutingModule],
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+],
   providers: [{ provide: RouteReuseStrategy, 
     useClass: IonicRouteStrategy }, 
     CategoriaService, 
