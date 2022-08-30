@@ -22,7 +22,12 @@ export function tokenGetter() {
 
 
     let usr = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEYS.localUser));
-    return usr.token;
+    if (usr) {
+      return usr.token;
+    }
+    else {
+      return null;
+    }
 
 }
 

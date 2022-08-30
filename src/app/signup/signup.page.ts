@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+import { CidadeDTO } from 'src/models/cidade.dto';
+import { EstadoDTO } from 'src/models/estado.dto';
+import { CidadeService } from 'src/services/domain/cidade.service';
+import { EstadoService } from 'src/services/domain/estado.service';
 
 @Component({
   selector: 'app-signup',
@@ -27,11 +32,29 @@ export class SignupPage implements OnInit {
     cidadeId: new FormControl(null, [Validators.required])
   });
 
-  constructor(){ 
+  estados: EstadoDTO[];
+  cidades: CidadeDTO[];
+
+  constructor(public nav:NavController,
+    public cidadeService:CidadeService,
+    public estadoService:EstadoService){ 
 
   }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter(){
+    console.log("entrou no did enter");
+    this.estadoService.findAll().subscribe(response => {
+      this.estados = response;
+      this.profileForm.controls.estadoId.setValue(this.estados[0].id);
+      this.updateCidades();
+    },
+    error=> {
+      console.log("erro buscando estados: " + error);
+    });
+
   }
 
   signupUser(){
@@ -39,6 +62,19 @@ export class SignupPage implements OnInit {
   }
 
   updateCidades(){
-    
+
+    let estado_id = this.profileForm.value.estadoId;
+
+    if(estado_id){ 
+      console.log("Update Cidade - Id do estado: " + estado_id);
+
+      this.cidadeService.findAll(estado_id).subscribe(response => {
+        this.cidades = response;
+        this.profileForm.controls.cidadeId.setValue(null);
+      },
+      error=> {
+        console.log("erro buscando cidades: " + error);
+      });
+    }
   }
 }
