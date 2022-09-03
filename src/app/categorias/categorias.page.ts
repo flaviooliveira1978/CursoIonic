@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
 import { MenuController, NavController } from '@ionic/angular';
 import { API_CONFIG } from 'src/environments/environment';
 import { CategoriaDTO } from 'src/models/categoria.dto';
@@ -28,6 +29,11 @@ export class CategoriasPage implements OnInit {
     },
     error=> {});
 
+  }
+
+
+  showProducts(id:string){
+    this.nav.navigateForward('produto/'+id);
   }
 
 }
