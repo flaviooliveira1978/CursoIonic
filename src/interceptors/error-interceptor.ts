@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { Observable, throwError } from "rxjs";
 import {catchError} from "rxjs/operators"
+import { FieldMessage } from "src/models/fieldmessage";
 import { StorageService } from "src/services/storage.service";
 
 @Injectable()
@@ -25,7 +26,6 @@ export class ErrorInterceptor implements HttpInterceptor {
             if(!errorObj.status){
                 errorObj = JSON.parse(errorObj);
             }
-            console.log('Erro detectado pelo Interceptor'); 
 
             switch(errorObj.status){
                 case 403: 
@@ -33,6 +33,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                 break;
                 case 401: 
                     this.handle401();
+                break;
+                case 422: 
+                console.log('error: '+ JSON.stringify(errorObj.errors)); 
+                this.handle422(errorObj.errors);
                 break;
                 default:
                     this.handleDefaultError(errorObj);
@@ -43,10 +47,12 @@ export class ErrorInterceptor implements HttpInterceptor {
           }))
     }
     handle401(){
+
+
         let alert = this.alertCtrl.create(
             {
-            header:'Falha na autenticação',
-            message:'E-mail ou Senha inválidos!',
+            header:'401: Falha na autenticação',
+            message: 'E-mail ou Senha inválidos!',
             buttons: ['OK']
         }
         ).then(res => {
@@ -55,8 +61,23 @@ export class ErrorInterceptor implements HttpInterceptor {
       
           });
     }
+
     handle403(){
         this.storage.setLocalUser(null);
+    }
+
+    handle422(errorObj){
+        let alert = this.alertCtrl.create(
+            {
+            header:'422: Falha inserindo usuário',
+            message: this.listError(errorObj),
+            buttons: ['OK']
+        }
+        ).then(res => {
+
+            res.present();
+      
+          });
     }
     handleDefaultError(errorObj){
         let alert = this.alertCtrl.create(
@@ -71,6 +92,15 @@ export class ErrorInterceptor implements HttpInterceptor {
       
           });       
 
+    }
+    listError(messages: FieldMessage[]):string{
+        let msg = "";
+        
+        for(var i=0; i < messages.length;i++){       
+            msg = msg + "<p><strong>" + messages[i].fieldName + ":</strong> " +messages[i].message + "</p>";
+        }
+
+        return msg;
     }
 }
 

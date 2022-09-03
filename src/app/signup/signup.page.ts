@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { CidadeDTO } from 'src/models/cidade.dto';
 import { EstadoDTO } from 'src/models/estado.dto';
 import { CidadeService } from 'src/services/domain/cidade.service';
+import { ClienteService } from 'src/services/domain/cliente.service';
 import { EstadoService } from 'src/services/domain/estado.service';
 
 @Component({
@@ -37,7 +38,9 @@ export class SignupPage implements OnInit {
 
   constructor(public nav:NavController,
     public cidadeService:CidadeService,
-    public estadoService:EstadoService){ 
+    public estadoService:EstadoService,
+    public clienteService:ClienteService,
+    public alertCtrl: AlertController){ 
 
   }
 
@@ -45,7 +48,6 @@ export class SignupPage implements OnInit {
   }
 
   ionViewDidEnter(){
-    console.log("entrou no did enter");
     this.estadoService.findAll().subscribe(response => {
       this.estados = response;
       this.profileForm.controls.estadoId.setValue(this.estados[0].id);
@@ -58,7 +60,26 @@ export class SignupPage implements OnInit {
   }
 
   signupUser(){
-    console.log("Entrou no submit form!!");
+    this.clienteService.insert(this.profileForm.value).subscribe(response => {
+      let alert = this.alertCtrl.create(
+        {
+        header:'Sucesso',
+        message:'Usuário inserido com sucesso!',
+        buttons: [{
+          text: "OK",
+          handler: () =>{
+            this.nav.navigateRoot('login');
+          }}]
+      }
+      ).then(res => {
+          res.present();
+        });
+
+    },
+    error=> {
+      console.log("erro inserindo cliente: " + error);
+    });
+
   }
 
   updateCidades(){
