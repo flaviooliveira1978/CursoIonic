@@ -32,7 +32,8 @@ export class ProdutoPage implements OnInit {
       }
     );
 
-    this.produto.findByCategoria(this.cat_id).subscribe(response => {
+    this.produto.findByCategoria(this.cat_id).subscribe(
+    response => {
       this.cat = response;
       this.items = response.produtos;
       this.getProductsImages();
@@ -66,8 +67,9 @@ export class ProdutoPage implements OnInit {
     
   }
 
-  showDetail(){
-
+  showDetail(id){
+    this.nav.navigateForward('product-detail/'+id);
+  
   }
 
 

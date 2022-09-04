@@ -19,4 +19,8 @@ export class ProdutoService {
         let url = API_CONFIG.bucketBaseUrl+"/prod" +id+"-small.jpg";
         return this.http.get(url, {responseType : 'blob'});
     }
+
+    getProductDetail(id: string):Observable<ProdutoDTO>{
+        return this.http.get<ProdutoDTO>(API_CONFIG.baseUrl+'/produtos/'+id);
+    }
 }
