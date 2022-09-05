@@ -10,14 +10,14 @@ import { StorageService } from 'src/services/storage.service';
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  
+
   public items: CartItem[];
 
-  constructor(public storage:StorageService,
+  constructor(public cartService:CartService,
     public produtoService:ProdutoService) { }
 
   ngOnInit() {
-    let cart = this.storage.getCart();
+    let cart = this.cartService.getCart();
     console.log("carrinho: "+JSON.stringify(cart.items));
     this.items = cart.items;
     this.getProductsImages();
