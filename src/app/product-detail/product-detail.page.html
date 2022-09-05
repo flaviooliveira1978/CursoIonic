@@ -8,9 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <!--ion-avatar-->
-    <ion-img class="circle" [src]="produto?.imageUrl || 'assets/img/avatar-blank.png'"></ion-img>
-  <!--/ion-avatar-->
-  <h2 class="name">{{produto?.nome}}</h2>
-  <p class="name"> {{produto?.preco | currency}}</p>
+  <ion-card>
+    <ion-img class="circle" [src]="produto?.imageUrl || 'assets/img/prod.jpeg'"></ion-img>
+
+    <ion-card-content>
+      <ion-card-title class="name">{{produto?.nome}}</ion-card-title>
+      <p class="name"> {{produto?.preco | currency}}</p>
+      <ion-button expand="block" fill="outline" (click)="addToCart(produto)">Adicionar ao Carrinho</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

@@ -59,9 +59,6 @@ export class ProdutoPage implements OnInit {
           console.log("errors "+ error);
 
         });
-
-
-
        
     }
     
@@ -69,9 +66,6 @@ export class ProdutoPage implements OnInit {
 
   showDetail(id){
     this.nav.navigateForward('product-detail/'+id);
-  
   }
-
-
 
 }

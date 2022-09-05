@@ -21,5 +21,6 @@ export const API_CONFIG = {
 };
 
 export const LOCALSTORAGE_KEYS = {
-  localUser: 'localUser'
+  localUser: 'localUser',
+  cart: 'appCart'
 }

@@ -30,6 +30,11 @@ export class AppComponent {
         icon  : "list"
       },
       {
+        title : "Carrinho",
+        url   : "/cart",
+        icon  : "cart"
+      },
+      {
         title : "Logout",
         url   : "/logout",
         icon  : "exit-outline"

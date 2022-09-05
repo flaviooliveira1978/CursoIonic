@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { API_CONFIG } from 'src/environments/environment';
 import { ProdutoDTO } from 'src/models/produto.dto';
+import { CartService } from 'src/services/domain/cart.service';
 import { ProdutoService } from 'src/services/domain/produto.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class ProductDetailPage implements OnInit {
   public produto:ProdutoDTO;
 
   constructor(public produtoService:ProdutoService,
-    public activatedRoute:ActivatedRoute) { }
+    public activatedRoute:ActivatedRoute,
+    public cartService:CartService) { }
 
   ngOnInit() {
 
@@ -28,13 +30,21 @@ export class ProductDetailPage implements OnInit {
     this.produtoService.getProductDetail(this.produto_id).subscribe(
       response => {
         this.produto = response;
-        this.produto.imageUrl = API_CONFIG.bucketBaseUrl+"/prod" +this.produto_id+".jpg";
+        this.produtoService.getImageFromBucket(this.produto_id).subscribe(
+          data =>{
+            this.produto.imageUrl = API_CONFIG.bucketBaseUrl+"/prod" +this.produto_id+".jpg";
+          },
+          error =>{}
+        )
       },
       error =>{
         console.log("Erro obtande detalhe de produto: "+this.produto_id + " - " + error);
       }
     );
 
+  }
+  addToCart(produto:ProdutoDTO){
+    this.cartService.addToCart(produto);
   }
 
 }
