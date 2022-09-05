@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { API_CONFIG } from 'src/environments/environment';
 import { CartItem } from 'src/models/cart-item';
+import { CartService } from 'src/services/domain/cart.service';
 import { ProdutoService } from 'src/services/domain/produto.service';
 import { StorageService } from 'src/services/storage.service';
 
