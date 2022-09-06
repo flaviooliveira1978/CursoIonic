@@ -11,10 +11,16 @@
     <ion-item *ngFor="let item of items">
       <ion-thumbnail slot="start">
         <img [src]="item.produto.imageUrl || 'assets/img/prod.jpeg'">
+
       </ion-thumbnail>
       <ion-label>{{item.produto.nome}}</ion-label>
       <ion-label>{{item.produto.preco | currency}}</ion-label>
+      
+      <ion-button (click)="removeFromCart(item.produto)"><ion-icon name="remove-outline"></ion-icon></ion-button>
       <p>{{item.quantidade}}</p>
+      <ion-button (click)="addToCart(item.produto)"><ion-icon name="add-outline"></ion-icon></ion-button>
+
+
 
     </ion-item>
   </ion-list>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { API_CONFIG } from 'src/environments/environment';
 import { ProdutoDTO } from 'src/models/produto.dto';
 import { CartService } from 'src/services/domain/cart.service';
@@ -17,7 +18,8 @@ export class ProductDetailPage implements OnInit {
 
   constructor(public produtoService:ProdutoService,
     public activatedRoute:ActivatedRoute,
-    public cartService:CartService) { }
+    public cartService:CartService,
+    public nav:NavController) { }
 
   ngOnInit() {
 
@@ -45,6 +47,8 @@ export class ProductDetailPage implements OnInit {
   }
   addToCart(produto:ProdutoDTO){
     this.cartService.addToCart(produto);
+    this.nav.navigateRoot('cart');
+
   }
 
 }

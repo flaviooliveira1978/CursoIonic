@@ -18,6 +18,9 @@ export class CartPage implements OnInit {
     public produtoService:ProdutoService) { }
 
   ngOnInit() {
+
+  }
+  ionViewDidEnter(){
     let cart = this.cartService.getCart();
     console.log("carrinho: "+JSON.stringify(cart.items));
     this.items = cart.items;
@@ -43,5 +46,11 @@ export class CartPage implements OnInit {
        
     }
     
+  }
+  removeFromCart(produto){
+    this.items = this.cartService.removeFromCart(produto).items;
+  }
+  addToCart(produto){
+    this.items = this.cartService.addToCart(produto).items;
   }
 }
