@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { API_CONFIG } from 'src/environments/environment';
 import { CartItem } from 'src/models/cart-item';
 import { CartService } from 'src/services/domain/cart.service';
@@ -15,7 +16,8 @@ export class CartPage implements OnInit {
   public items: CartItem[];
 
   constructor(public cartService:CartService,
-    public produtoService:ProdutoService) { }
+    public produtoService:ProdutoService,
+    public nav: NavController) { }
 
   ngOnInit() {
 
@@ -52,5 +54,12 @@ export class CartPage implements OnInit {
   }
   addToCart(produto){
     this.items = this.cartService.addToCart(produto).items;
+  }
+  total():number{
+    return this.cartService.total();
+  }
+
+  goOn(){
+    this.nav.navigateRoot('categorias');
   }
 }

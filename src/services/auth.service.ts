@@ -6,6 +6,7 @@ import { catchError } from "rxjs/operators";
 import { API_CONFIG } from "src/environments/environment";
 import { CredenciaisDTO } from "src/models/credenciais.dto";
 import { LocalUser } from "src/models/local_user";
+import { CartService } from "./domain/cart.service";
 import { StorageService } from "./storage.service";
 
 
@@ -21,7 +22,8 @@ export class AuthService {
     contentHeader = new HttpHeaders({"Content-Type": "application/json"});
 
     constructor(public http:HttpClient, 
-        public storage: StorageService){
+        public storage: StorageService,
+        public cartService: CartService){
     }
 
     authenticate(user: CredenciaisDTO): Observable<any> {
@@ -44,6 +46,8 @@ export class AuthService {
         console.log('usuario logado jwt: '+  usr.email);
         console.log('token jwt: '+  usr.token);
         this.storage.setLocalUser(usr);
+        this.cartService.createOrCleanCart();
+
     }
     logout(){
         this.storage.setLocalUser(null);
