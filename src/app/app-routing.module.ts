@@ -37,6 +37,18 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
+    path: 'endereco',
+    loadChildren: () => import('./endereco/endereco.module').then( m => m.EnderecoPageModule)
+  },
+  {
+    path: 'pagamento',
+    loadChildren: () => import('./pagamento/pagamento.module').then( m => m.PagamentoPageModule)
+  },
+  {
+    path: 'confirmacao',
+    loadChildren: () => import('./confirmacao/confirmacao.module').then( m => m.ConfirmacaoPageModule)
   }
 ];
 @NgModule({

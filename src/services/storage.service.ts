@@ -27,7 +27,7 @@ export class StorageService {
 
     setCart(obj:Cart){
 
-        console.log('setLocalUser: '+ obj);
+        console.log('setLocalUser: '+ JSON.stringify(obj));
         if(obj == null){
             localStorage.removeItem(LOCALSTORAGE_KEYS.cart);
         }

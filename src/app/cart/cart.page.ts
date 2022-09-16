@@ -59,7 +59,7 @@ export class CartPage implements OnInit {
     return this.cartService.total();
   }
 
-  goOn(){
-    this.nav.navigateRoot('categorias');
-  }
+
+
+
 }

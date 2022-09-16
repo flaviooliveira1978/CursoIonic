@@ -26,8 +26,7 @@ export class ProfilePage implements OnInit {
       this.clienteService.findByEmail(localUser.email).subscribe (
         response =>{
           this.cliente = response;
-          this.getImageIfExists();
-          
+          this.getImageIfExists();         
         },
         error => {
           if (error.status == 403){
@@ -48,7 +47,6 @@ export class ProfilePage implements OnInit {
     .subscribe(
       response => {
         this.cliente.imageUrl = API_CONFIG.bucketBaseUrl+'/'+this.cliente.id+'.jpg'
-        console.log('--> foto cliente: '+ this.cliente.imageUrl);
       },
       error =>{});
   }

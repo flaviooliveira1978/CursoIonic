@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Cart } from "src/models/cart";
+import { EnderecoDTO } from "src/models/endereco.dto";
 import { ProdutoDTO } from "src/models/produto.dto";
 import { StorageService } from "../storage.service";
 
@@ -13,7 +14,7 @@ export class CartService {
     }
 
     createOrCleanCart(): Cart {
-        let cart: Cart = {items:[]};
+        let cart: Cart = {endereco:null,items:[]};
         this.storage.setCart(cart);
         return cart;
     }
@@ -60,6 +61,13 @@ export class CartService {
             sum = sum + cart.items[i].produto.preco * cart.items[i].quantidade;
         }
         return sum;
+    }
+
+    setAddress(end: EnderecoDTO): Cart{
+        let cart = this.getCart();
+        cart.endereco = end;
+        this.storage.setCart(cart);
+        return cart;
     }
 
 }

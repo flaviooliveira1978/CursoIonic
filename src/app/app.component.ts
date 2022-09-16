@@ -35,6 +35,11 @@ export class AppComponent {
         icon  : "cart"
       },
       {
+        title : "Endereco",
+        url   : "/endereco",
+        icon  : "address"
+      },
+      {
         title : "Logout",
         url   : "/logout",
         icon  : "exit-outline"

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Escolha o Endereço</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="selectedValue" (ionChange)="checkValue($event)">
+    <ion-item *ngFor="let item of items">
+      <ion-radio slot="start" value="{{item.id}}"></ion-radio>
+      <ion-label>{{item.logradouro}} {{item.numero}} {{item.complemento}}
+        <p>{{item.bairro}} - {{item.cidade.nome}} - {{item.cidade.estado.nome}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-radio-group>
+  </ion-list>
+  <ion-button expand="block" (click)="goOn(end)">Finalizar Compra</ion-button>
+</ion-content>
