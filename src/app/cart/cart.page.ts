@@ -24,8 +24,8 @@ export class CartPage implements OnInit {
   }
   ionViewDidEnter(){
     let cart = this.cartService.getCart();
-    console.log("carrinho: "+JSON.stringify(cart.items));
-    this.items = cart.items;
+    console.log("carrinho: "+JSON.stringify(cart.itens));
+    this.items = cart.itens;
     this.getProductsImages();
   }
 
@@ -50,10 +50,10 @@ export class CartPage implements OnInit {
     
   }
   removeFromCart(produto){
-    this.items = this.cartService.removeFromCart(produto).items;
+    this.items = this.cartService.removeFromCart(produto).itens;
   }
   addToCart(produto){
-    this.items = this.cartService.addToCart(produto).items;
+    this.items = this.cartService.addToCart(produto).itens;
   }
   total():number{
     return this.cartService.total();

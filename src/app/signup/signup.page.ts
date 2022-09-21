@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
 import { CidadeDTO } from 'src/models/cidade.dto';
 import { EstadoDTO } from 'src/models/estado.dto';

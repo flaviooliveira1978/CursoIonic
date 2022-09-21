@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ConfirmacaoPageRoutingModule } from './confirmacao-routing.module';
 
 import { ConfirmacaoPage } from './confirmacao.page';
+import { PedidoService } from 'src/services/domain/pedido.service';
 
 @NgModule({
   imports: [

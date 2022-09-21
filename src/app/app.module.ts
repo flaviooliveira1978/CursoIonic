@@ -17,6 +17,7 @@ import { LOCALSTORAGE_KEYS } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdutoService } from 'src/services/domain/produto.service';
 import { CartService } from 'src/services/domain/cart.service';
+import { PedidoService } from 'src/services/domain/pedido.service';
 
 
 
@@ -60,6 +61,7 @@ export function tokenGetter() {
     ClienteService,
     ProdutoService,
     CartService,
+    PedidoService,
     ErrorInterceptorProvider],
   bootstrap: [AppComponent],
 })

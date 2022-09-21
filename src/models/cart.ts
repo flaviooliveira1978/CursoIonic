@@ -1,7 +1,12 @@
+
 import { CartItem } from "./cart-item";
+import { ClienteDTO } from "./cliente.dto";
 import { EnderecoDTO } from "./endereco.dto";
+import { PagamentoDTO } from "./pagamento.dto";
 
 export interface Cart {
-    endereco:EnderecoDTO;
-    items: CartItem[]
+    cliente:ClienteDTO;
+    enderecoDeEntrega:EnderecoDTO;
+    pagamento: PagamentoDTO;
+    itens: CartItem[]
 }

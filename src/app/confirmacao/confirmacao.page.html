@@ -1,9 +1,42 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>confirmacao</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Confirmação</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content padding>
+  <ion-label>Detalhe do Pedido</ion-label>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-thumbnail slot="start">
+        <img [src]="item.produto.imageUrl || 'assets/img/prod.jpeg'">
 
-<ion-content>
-
+      </ion-thumbnail>
+      <ion-label>{{item.produto.nome}}</ion-label>
+      <ion-label>{{item.produto.preco | currency}}</ion-label>
+      <p>qtd {{item.quantidade}}</p>
+    </ion-item>
+  </ion-list>
+  <ion-item *ngIf="total()>0">
+    <h2>Total</h2><h2 slot="end">{{total()| currency}}</h2>
+    </ion-item>
+  <ion-item *ngIf="total() <=0">
+    <h3>Seu carrinho está vazio</h3>
+  </ion-item>
+  <ion-label>Endereço de Entrega</ion-label>
+  <ion-item>
+    <ion-label> {{endereco?.logradouro}}{{endereco?.numero}} {{endereco?.complemento}}
+      <p>{{endereco?.bairro}} - {{endereco?.cidade.nome}} - {{endereco?.cidade.estado.nome}}</p>
+    </ion-label>
+  </ion-item>
+  <ion-label>Pagamento</ion-label>
+  <ion-item *ngIf="pagamento['@type']  == 'pagamentoComCartao'">
+  <p>Pagamento com cartão {{pagamento.numeroDeParcelas}} parcelas</p>
+  </ion-item>
+  <ion-item *ngIf="pagamento['@type']  == 'pagamentoComBoleto'">
+  <p>Pagamento com Boleto</p>
+    </ion-item>
+    <ion-button expand="block" (click)="finalizarPedido()">Finalizar Compra</ion-button>
 </ion-content>

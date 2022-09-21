@@ -7,15 +7,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-list>
-    <ion-radio-group [(ngModel)]="selectedValue" (ionChange)="checkValue($event)">
-    <ion-item *ngFor="let item of items">
-      <ion-radio slot="start" value="{{item.id}}"></ion-radio>
-      <ion-label>{{item.logradouro}} {{item.numero}} {{item.complemento}}
-        <p>{{item.bairro}} - {{item.cidade.nome}} - {{item.cidade.estado.nome}}</p>
-      </ion-label>
-    </ion-item>
-  </ion-radio-group>
-  </ion-list>
-  <ion-button expand="block" (click)="goOn(end)">Finalizar Compra</ion-button>
+  <form [formGroup]="addressForm" (ngSubmit)="goOn(); $event.preventDefault()">
+    <ion-label>Selecione um Endereço</ion-label>
+    <ion-list>
+      <ion-radio-group formControlName="id"  (ionChange)="checkValue($event)">
+      <ion-item *ngFor="let item of items">
+        <ion-radio slot="start" value="{{item.id}}"></ion-radio>
+        <ion-label>{{item.logradouro}} {{item.numero}} {{item.complemento}}
+          <p>{{item.bairro}} - {{item.cidade.nome}} - {{item.cidade.estado.nome}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-radio-group>
+    </ion-list>
+    <ion-button expand="block" type="submit">Avançar</ion-button>
+  </form>
 </ion-content>

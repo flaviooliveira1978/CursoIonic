@@ -7,15 +7,27 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-list>
-    <ion-radio-group [(ngModel)]="selectedValue" (ionChange)="checkValue($event)">
-    <ion-item *ngFor="let item of items">
-      <ion-radio slot="start" value="{{item.id}}"></ion-radio>
-      <ion-label>{{item.logradouro}} {{item.numero}} {{item.complemento}}
-        <p>{{item.bairro}} - {{item.cidade.nome}} - {{item.cidade.estado.nome}}</p>
-      </ion-label>
+  <ion-label position="stacked">Selecione a forma de pagamento</ion-label>
+  <form [formGroup]="paymentForm" (ngSubmit)="goOn(); $event.preventDefault()">
+    <ion-radio-group formControlName="@type" (ionChange)="checkValue($event)">
+      <ion-list>
+        <ion-item>
+          <ion-label>Pagamento com Cartão</ion-label>
+          <ion-radio checked="true" slot="start" value="pagamentoComCartao"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Pagamento com Boleto</ion-label>
+          <ion-radio slot="start" value="pagamentoComBoleto"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-radio-group>
+    <ion-item *ngIf="paymentForm.value['@type']  == 'pagamentoComCartao'">
+      <ion-label position="stacked">Escolhas quantidade de parcelas</ion-label>
+      <ion-select placeholder="parcelas" formControlName="numeroDeParcelas" >
+        <ion-select-option *ngFor="let n of parcelas" [value]="n">{{n}}</ion-select-option>
+      </ion-select>
     </ion-item>
-  </ion-radio-group>
-  </ion-list>
-  <ion-button expand="block" (click)="goOn(end)">Finalizar Compra</ion-button>
+    <ion-button expand="block" type="submit" [disabled]="paymentForm.invalid">Confirmar</ion-button>
+  </form>
+
 </ion-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { ClienteDTO } from 'src/models/cliente.dto';
+
 import { EnderecoDTO } from 'src/models/endereco.dto';
 import { CartService } from 'src/services/domain/cart.service';
 import { ClienteService } from 'src/services/domain/cliente.service';
@@ -14,14 +15,17 @@ import { StorageService } from 'src/services/storage.service';
 export class EnderecoPage implements OnInit {
 
   public items: EnderecoDTO[];
-  selectedValue:any;
+
+
+
+  public addressForm = new FormGroup({
+    id : new FormControl(1,Validators.required)
+  });
 
   constructor(public storage:StorageService,
               public clienteService:ClienteService,
               public nav:NavController,
               public cartService: CartService) { }
-
-
 
   ngOnInit() {
 
@@ -33,7 +37,7 @@ export class EnderecoPage implements OnInit {
       if(localUser && localUser.email){
         this.clienteService.findByEmail(localUser.email).subscribe (
           response =>{
-            this.items = response['enderecos'];
+            this.items = <EnderecoDTO[]>response['enderecos'];
           
           },
           error => {
@@ -52,8 +56,8 @@ export class EnderecoPage implements OnInit {
   }
   goOn(){
 
-    let i = parseInt(this.selectedValue);
-    this.cartService.setAddress(this.items[i-1]);
+
+    this.cartService.setAddress(<EnderecoDTO>this.addressForm.value);
     this.nav.navigateForward("pagamento");
   }
   //function to print what is inputed in the form that is declared above

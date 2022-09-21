@@ -13,7 +13,6 @@ export class EstadoService {
     }
     findAll():Observable<EstadoDTO[]>{
         let endpoint = API_CONFIG.baseUrl +"/estados";
-        console.log("chamando url de estados: "+ endpoint);
         return this.http.get<EstadoDTO[]>(endpoint);
     }
 }
