@@ -42,7 +42,7 @@ export class PagamentoPage implements OnInit {
 
     this.cartService.setPayment(<any>this.paymentForm.value);
 
-    this.nav.navigateForward("confirmacao");
+    this.nav.navigateRoot("confirmacao");
   }
 
 }
