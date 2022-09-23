@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Cart } from 'src/models/cart';
@@ -81,8 +82,20 @@ export class ConfirmacaoPage implements OnInit {
     console.log("pedido: "+ JSON.stringify(this.cart));
 
     this.pedidoService.insert(this.cart).subscribe(
-      respose => {
-        console.log("pedido inserido com sucesso: "+ respose.headers.get('location'));
+      (response: HttpResponse<any> )=> {
+        console.log("pedido inserido com sucesso: "+ response.headers.get('location'));
+        this.cartService.createOrCleanCart();
+        this.nav.navigateRoot('categorias');
+        response.headers
+        .keys()
+        .forEach(keyName =>
+          console.log(
+            `The value of the ${keyName} header is: ${response.headers.get(
+              keyName
+            )}`
+          )
+        );
+
       },
       error => {
         console.log("erro: "+ error);
@@ -94,3 +107,17 @@ export class ConfirmacaoPage implements OnInit {
   
 
 }
+
+
+/*
+        response.headers
+        .keys()
+        .forEach(keyName =>
+          console.log(
+            `The value of the ${keyName} header is: ${response.headers.get(
+              keyName
+            )}`
+          )
+        );
+        
+        */

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, NavParams } from '@ionic/angular';
+import { LoadingController, NavController, NavParams } from '@ionic/angular';
 import { API_CONFIG } from 'src/environments/environment';
 import { CategoriaDTO } from 'src/models/categoria.dto';
 import { ProdutoDTO } from 'src/models/produto.dto';
@@ -20,29 +20,19 @@ export class ProdutoPage implements OnInit {
   constructor(
     public nav: NavController,
     public produto: ProdutoService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    public loadingController: LoadingController
 
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
 
     this.activatedRoute.paramMap.subscribe(
-      data => {
-        this.cat_id = data.get("id");
-      }
-    );
-
-    this.produto.findByCategoria(this.cat_id).subscribe(
-    response => {
-      this.cat = response;
-      this.items = response.produtos;
-      this.getProductsImages();
-    },
-    error=> {
-      console.log("Erro ao buscar produtos!");
-    });
-
+      data => {this.cat_id = data.get("id")});
+    this.loadData();
+ 
   }
+
   getProductsImages(){
 
 
@@ -52,7 +42,6 @@ export class ProdutoPage implements OnInit {
       .subscribe(
         response => {
           item.imageUrl = API_CONFIG.bucketBaseUrl+"/prod" +item.id+"-small.jpg";
-          console.log("sucesso true: "+ item.imageUrl );
 
         },
         error =>{
@@ -66,6 +55,37 @@ export class ProdutoPage implements OnInit {
 
   showDetail(id){
     this.nav.navigateForward('product-detail/'+id);
+  }
+
+  async loadData(){
+
+    const loading = await this.loadingController.create({message: 'Aguarde...'});
+    await loading.present();
+
+    this.produto.findByCategoria(this.cat_id).subscribe(
+      response => {
+      this.cat = response;
+      this.items = response.produtos;
+      this.getProductsImages();
+
+
+    },
+      error=> {
+      console.log("Erro ao buscar produtos!");
+
+
+    });
+
+    await loading.dismiss();
+  }
+
+  doRefresh(event){
+    this.loadData();
+    setTimeout(()=> {
+      event.target.complete();
+    },1000);
+
+    
   }
 
 }
