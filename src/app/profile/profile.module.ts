@@ -8,12 +8,17 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
 
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule
+  ],
+  providers: [
+    Camera
   ],
   declarations: [ProfilePage]
 })

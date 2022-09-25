@@ -14,4 +14,20 @@
   <h2 text-center class="name">{{cliente?.nome}}</h2>
   <p text-center class="name"> {{cliente?.email}}</p>
 {{email}}
+
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Enviar imagem</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+  <ion-item *ngIf="picture">
+    <ion-img [src]="picture"></ion-img>
+  </ion-item>
+  <ion-item>
+    <ion-button type="block" (click)= "takePhoto()" [disabled] = "cameraOn">Tirar Foto</ion-button>
+  </ion-item>
+  </ion-card-content>
+</ion-card>
+
 </ion-content>
