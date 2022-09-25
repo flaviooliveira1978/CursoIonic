@@ -11,8 +11,8 @@ export class ProdutoService {
     constructor(public http:HttpClient){
     }
 
-    findByCategoria(id: string):Observable<CategoriaDTO>{
-        return this.http.get<CategoriaDTO>(API_CONFIG.baseUrl+'/categorias/'+id);
+    findByCategoria(id: string, page: number = 0, size : number = 10 ):Observable<CategoriaDTO>{
+        return this.http.get<CategoriaDTO>(API_CONFIG.baseUrl+'/produtos?categorias='+id +'&page='+page+'&linesPerPage='+size);
     }
 
     getSmallImageFromBucket(id:string) : Observable<any> {
