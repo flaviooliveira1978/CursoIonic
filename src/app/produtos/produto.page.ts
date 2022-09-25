@@ -66,10 +66,6 @@ export class ProdutoPage implements OnInit {
       response => {
       let start = this.items.length;
       this.items = this.items.concat(response['content']);
-      console.log("response: "+ JSON.stringify(response['content']));
-      console.log("items: "+ JSON.stringify(this.items));
-
-
       let end = this.items.length;
       this.getProductsImages(start,end);
     },
@@ -83,6 +79,8 @@ export class ProdutoPage implements OnInit {
   }
 
   doRefresh(event){
+    this.items = [];
+    this.page=0;
     this.loadData();
     setTimeout(()=> {
       event.target.complete();
