@@ -9,6 +9,7 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { ImageUtilService } from 'src/services/image-util.service';
 
 @NgModule({
   imports: [

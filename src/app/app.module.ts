@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdutoService } from 'src/services/domain/produto.service';
 import { CartService } from 'src/services/domain/cart.service';
 import { PedidoService } from 'src/services/domain/pedido.service';
+import { ImageUtilService } from 'src/services/image-util.service';
 
 
 
@@ -62,6 +63,7 @@ export function tokenGetter() {
     ProdutoService,
     CartService,
     PedidoService,
+    ImageUtilService,
     ErrorInterceptorProvider],
   bootstrap: [AppComponent],
 })
