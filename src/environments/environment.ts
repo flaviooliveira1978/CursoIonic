@@ -15,7 +15,7 @@ export const environment = {
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 export const API_CONFIG = {
-  baseUrl :"http://localhost:8080",
+  baseUrl :"http://curso-env.eba-pibppwgk.us-east-2.elasticbeanstalk.com",
   bucketBaseUrl : "https://codigo-curso-spring-ffneto.s3.us-east-2.amazonaws.com"
 
 };

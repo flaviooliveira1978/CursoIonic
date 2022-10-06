@@ -45,8 +45,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:8080"],
-        disallowedRoutes: ["http://localhost:8080/login"],
+        allowedDomains: ["curso-env.eba-pibppwgk.us-east-2.elasticbeanstalk.com"],
+        disallowedRoutes: ["http://curso-env.eba-pibppwgk.us-east-2.elasticbeanstalk.com/login"],
       },
     }),
     IonicModule.forRoot(), 
