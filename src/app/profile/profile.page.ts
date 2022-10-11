@@ -25,6 +25,14 @@ export class ProfilePage implements OnInit {
     mediaType: this.camera.MediaType.PICTURE
   }
 
+  options2: CameraOptions = {
+    quality: 100,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
+
   cliente : ClienteDTO;
 
   constructor(
@@ -75,6 +83,19 @@ export class ProfilePage implements OnInit {
     this.cameraOn = true;
   
     this.camera.getPicture(this.options).then((imageData) => {
+    // imageData is either a base64 encoded string or a file URI
+    // If it's base64 (DATA_URL):
+    this.picture = 'data:image/jpeg;base64,' + imageData;
+    this.cameraOn = false;
+    }, (err) => {
+    // Handle error
+    });
+  }
+
+  getPhoto(){
+    this.cameraOn = true;
+  
+    this.camera.getPicture(this.options2).then((imageData) => {
     // imageData is either a base64 encoded string or a file URI
     // If it's base64 (DATA_URL):
     this.picture = 'data:image/jpeg;base64,' + imageData;

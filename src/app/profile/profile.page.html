@@ -26,6 +26,7 @@
   </ion-item>
 
     <ion-button expand="block" (click)= "takePhoto()" [disabled] = "cameraOn">Tirar Foto</ion-button>
+    <ion-button expand="block" (click)= "getPhoto()" [disabled] = "cameraOn">Galeria de Fotos</ion-button>
     <ion-button *ngIf="picture" expand="block" fill="outline" (click)= "sendPicture()">Enviar Imagem</ion-button>
     <ion-button *ngIf="picture" expand="block"  (click)= "cancel()">Cancelar Imagem</ion-button>
 
